@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="user/base_user::layout(~{::section})">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	
+	<section>
+	
+		<div class="card me-4  ">
+			<div class="card-body">	
+				<h1 class="text-center mb-3">Add Contact</h1>
+					<div class="container-fluid mt-1">
+						<div class="col-md-10 offset-md-1">
+						
+							<form action="#" th:action="@{/user/contact-process}" th:object="${contact}" enctype="multipart/form-data" method="post">
+								
+								
+									<!-- First Name -->
+									<div class="input-group flex-nowrap">
+ 										 <span class="input-group-text" id="addon-wrapping"><i class="fa fa-plus"></i></span>
+ 											 <input type="text" class="form-control" placeholder="Enter name here" name="name" id="name">
+									</div>
+									
+									<!-- Nick Name -->
+									<div class="input-group flex-nowrap mt-3">
+ 										 <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-face-smile"></i></span>
+ 											 <input type="text" class="form-control" placeholder="Enter nick-name here" name="nickName" id="nick_name">
+									</div>
+									
+									<!-- Phone Number -->
+									<div class="input-group flex-nowrap mt-3">
+ 										 <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-phone"></i></i></span>
+ 											 <input type="number" max="10" min="10" class="form-control" placeholder="Enter mobile number" name="phoneNo" id="phone_no">
+									</div>
+									
+									<!-- Email -->
+									<div class="input-group flex-nowrap mt-3">
+ 										 <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-envelope"></i></span>
+ 											 <input type="email"  class="form-control" placeholder="Enter email here" name="email" id="email">
+									</div>
+									
+									<!-- Work -->
+									<div class="input-group flex-nowrap mt-3">
+ 										 <span class="input-group-text" id="addon-wrapping"><i class="fa fa-briefcase"></i></span>
+ 											 <input type="text"  class="form-control" placeholder="Enter work here" name="work" id="work">
+									</div>
+									
+									<!-- Contact Description -->
+									<div class="form-group mt-3">
+										<textarea placeholder="Enter contact description" name="description" class="form-control" id="description" rows="10" ></textarea>
+									
+									</div>
+									
+									<!-- Contact Image -->
+									<div class="custom-file mt-3">
+										<input type="file" name="profileImage">
+									</div>
+									
+									
+									<!-- Submit Button -->
+									<div class="container mt-3 text-center">
+										<button class="btn btn-outline-success" style="font-weight: bold;">Save Contact</button>
+									</div>
+								
+							</form>
+							
+						</div> 
+					</div>
+			</div>
+		</div>
+		
+	</section>
+	
+</body>
+</html>

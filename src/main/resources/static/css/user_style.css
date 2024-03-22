@@ -1,0 +1,102 @@
+
+
+
+/* CSS for user-navbar */
+.primary-color{
+	background-color: #daf5da !important;
+}
+.navbar-fonts{
+	font-size : 1em;
+	font-family : Lucida Handwriting;
+	font-weight: bold;
+}
+
+.nav-item a:hover{
+	margin-top : -3px;
+	color : green;
+	
+}
+
+/* CSS for user-dashboard */
+
+.logoutbutton a {
+	text-decoration: none;
+	font-size: 1.3em;
+	font-family: monospace;
+	font-weight: bold;
+	margin-bottom: 2px;
+	color: green;
+}
+
+.logoutbutton {
+	height: 40px;
+}
+
+.logoutbutton:hover a {
+	color: white;
+}
+
+
+/* CSS for sidebar */
+
+@media only screen and (max-width: 600px) {
+	.sidebar{
+		display: none;
+		width: 80% !important;
+		background: gray;
+		height: 100%;
+		position: fixed;
+		padding-top: 30px;
+	}
+	.content{
+		margin-left: 0% !important;
+	}
+} 
+
+.sidebar{
+	width: 16%;
+	background: #3c3c3c;
+	position: fixed;
+	height: 100%;
+	padding-top: 50px;
+	margin-top: -25px;
+}
+
+.sidebar a{
+	display: block;
+	width: 100%;
+	padding: 10px 40px;
+	text-decoration: none;
+	color:white;	
+}
+
+.sidebar a:hover{
+	background: white;
+	color: black;	
+}
+
+.sidebar .divider{
+	height: .5px;
+	width: 100%;
+	background: white;
+	margin-top: 10px;
+}
+
+
+/* CSS for content */
+
+.content{
+	margin-left: 18%;	
+	margin-top: 5em;
+	
+}
+
+
+/* CSS for add-contact  */
+.card-body{
+	background-color: #eaecff;
+	border: 3px solid green;
+	border-radius: 20px;
+}
+
+
