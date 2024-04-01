@@ -100,3 +100,40 @@
 }
 
 
+/* CSS for Show-contacts */
+
+.my_profile_picture{
+height: 40px;
+width: 40px;
+object-fit:cover;
+border-radius: 50%;
+border : 2px solid black;
+margin-right: 10px;	
+}
+
+
+.view_contact_profile{
+	text-decoration: none;
+	font-size: 1.1em;
+	font-weight: bold;
+	color: green;
+}
+
+.view_contact_profile:hover{
+	color: white;
+}
+
+.view_contact_profile_button:hover a{
+	color: white;
+}
+
+.gradient-custom {
+/* fallback for old browsers */
+background: #f6d365;
+
+/* Chrome 10-25, Safari 5.1-6 */
+background: -webkit-linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1));
+
+/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1))
+}
