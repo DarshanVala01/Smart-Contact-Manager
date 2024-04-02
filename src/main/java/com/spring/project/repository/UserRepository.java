@@ -12,5 +12,5 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	
 	public User findByEmail(@Param("email") String email);
 	
-	
+
 }

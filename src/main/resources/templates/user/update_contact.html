@@ -14,9 +14,10 @@
 					<div class="container-fluid mt-1">
 						<div class="col-md-10 offset-md-1">
 						
-							<form action="#" th:action="@{/user/update-contact}" th:object="${contact}" enctype="multipart/form-data" method="post">
+							<form action="#" th:action="@{/user/update-contact-data}" th:object="${contact}" enctype="multipart/form-data" method="post">
 								
-								
+									<input type="hidden" th:value="${contact.cId}" name="cId">
+									
 									<!-- First Name -->
 									<div class="input-group flex-nowrap">
  										 <span class="input-group-text" id="addon-wrapping"><i class="fa fa-plus"></i></span>
@@ -32,7 +33,7 @@
 									<!-- Phone Number -->
 									<div class="input-group flex-nowrap mt-3">
  										 <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-phone"></i></i></span>
- 											 <input type="text" pattern="[7-9]{1}[0-9]{9}" th:value="${contact.phoneNo}" class="form-control" placeholder="Enter mobile number" name="phoneNo" id="phone_no">											 
+ 											 <input type="text" th:value="${contact.phoneNo}" class="form-control" placeholder="Enter mobile number" name="phoneNo" id="phone_no">											 
 									</div>
 									
 									<!-- Email -->
@@ -62,7 +63,7 @@
 									
 									<!-- Contact Image -->
 									<div class="custom-file mt-3">
-										<input type="file" name="profile_Image">
+										<input type="file" name="profile_pic" th:value="contact.imageUrl">
 									</div>
 									
 									

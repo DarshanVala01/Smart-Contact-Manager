@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -180,7 +181,34 @@ public class UserController {
 		Optional<Contact> contactOptional = this.contactRepository.findById(cId);
 		Contact contact = contactOptional.get();
 		
+	
+		
 		model.addAttribute("contact" , contact);
 		return "user/update_contact";
+	}
+	
+	// Update Contact Data Handler
+	@PostMapping("/update-contact-data")
+	public String updateContact(@ModelAttribute Contact contact ,
+								@RequestParam("profile_pic") MultipartFile file ,
+								Model model ,
+								HttpSession session,
+								Principal principal) {
+		
+		try {
+			System.out.println(contact.getCId());
+			System.out.println(contact.getName());
+			
+			User user = this.userRepository.findByEmail(principal.getName());
+			contact.setUser(user);
+			
+			this.contactRepository.save(contact);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}	
+		
+		return "redirect:/user/show-contacts/0";
 	}
 }
