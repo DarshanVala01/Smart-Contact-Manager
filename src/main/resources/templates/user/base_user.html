@@ -49,7 +49,7 @@
 		<a th:href="@{/user/index}" class="item"> <i class="fa-solid fa-house-user me-1"></i> Home</a> 
 		<a th:href="@{/user/show-contacts/0}" class="item"><i class="fa-solid fa-file-contract me-1"></i> View Contacts</a> 
 		<a th:href="@{/user/add-contact}" class="item"><i class="fa-solid fa-pen me-1"></i> Add Contacts</a> 
-		<a href="#" class="item"><i class="fa-regular fa-address-card me-1"></i> Your Profile</a> 
+		<a th:href="@{/user/user-profile}" class="item"><i class="fa-regular fa-address-card me-1"></i> Your Profile</a> 
 		<a href="#" class="item"><i class="fa-solid fa-gear me-1"></i> Settings</a> 
 		<a th:href="@{/logout}" class="item"><i class="fa-solid fa-right-from-bracket me-1"></i> Logout</a>
 		
@@ -78,6 +78,16 @@
   					  icon: "success",
   					  title: "Success",
   					  text: "Your contact is saved!",
+  					});
+  				</script>
+			</div>
+			
+			<div th:if="${session.message.type == 'updated'}">
+  				<script>
+  					Swal.fire({
+  					  icon: "success",
+  					  title: "Updated",
+  					  text: "Your contact is updated!",
   					});
   				</script>
 			</div>

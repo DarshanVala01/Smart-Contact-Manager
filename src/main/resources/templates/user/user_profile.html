@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="user/base_user::layout(~{::section})">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	
+	<section>
+		<h1>This is a your profile page</h1>
+		
+<div th:if="${user}">			
+<div class="vh-80 me-4" style="background-color: #f4f5f7;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-lg-6 mb-4 mb-lg-0">
+        <div class="card mb-3" style="border-radius: .5rem;">
+          <div class="row g-0">
+            <div class="col-md-4 gradient-custom text-center text-white"
+              style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+              	
+              <img th:src="@{'/images/profile.jpg'}"
+                 alt="Profile Image" class="img-fluid my-5" style="width: 80px; border-radius: 50%" /> 
+                
+              	<h5 th:text="${user.name}"></h5>
+             	
+             
+             	<div class="mt-5">
+             	
+             	<!-- <a th:onclick="|deleteContact(${contact.cId})|" class="btn btn-danger btn-sm">Delete</a>
+				<a th:href="@{'/user/update/'+ ${contact.cId}}" class="btn btn-primary btn-sm">Update</a> -->
+				
+             	</div>
+             	
+            </div>
+            <div class="col-md-8">
+              <div class="card-body p-4">
+                <h6 style="font-weight: bold; color: green;">Information</h6>
+                <hr class="mt-0 mb-4">
+               
+               
+                  <div class="col-12 mb-3">
+                    <h6>Email</h6>
+                    <p class="text-muted" th:text="${user.email}"></p>
+                  </div>
+            
+                 <hr class="mt-0 mb-4">
+                
+                  <div class="col-12 mb-3">
+                    <h6>About</h6>
+                    <p class="text-muted" th:text="${user.about}"></p>
+                  </div>
+               
+                <hr class="mt-0 mb-4">
+                
+                <div class="col-12 mb-3">
+                    <h6>Role</h6>
+                    <p class="text-muted" th:text="${user.role}"></p>
+                  </div>
+                  
+                  <hr class="mt-0 mb-4">
+                                  
+                  <div class="text-center">
+                 <button class="btn btn-success"><a style="text-decoration: none; color: white; font-weight: bold; " th:href="@{/user/index}">Back To Home</a></button>
+				</div>
+					
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+     
+   
+  </div>
+ 
+</div>
+</div>	
+	</section>
+	
+</body>
+</html>
