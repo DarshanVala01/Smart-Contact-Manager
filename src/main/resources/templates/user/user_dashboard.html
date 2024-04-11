@@ -10,7 +10,12 @@
 		<h1 class="dash">This is a User Dashboard</h1>
 		<h1 th:text="${user.email}"></h1>
 			
-		
+		<script>
+			$(document).ready(()=>{
+				$(".item").removeClass("active");
+				$("#home-link").addClass("active");
+			});
+		</script>
 		
 		</section>
 </body>

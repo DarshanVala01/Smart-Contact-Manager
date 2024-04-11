@@ -38,21 +38,6 @@
 
 
 /* CSS for sidebar */
-
-@media only screen and (max-width: 600px) {
-	.sidebar{
-		display: none;
-		width: 80% !important;
-		background: gray;
-		height: 100%;
-		position: fixed;
-		padding-top: 30px;
-	}
-	.content{
-		margin-left: 0% !important;
-	}
-} 
-
 .sidebar{
 	width: 16%;
 	background: #3c3c3c;
@@ -71,8 +56,8 @@
 }
 
 .sidebar a:hover{
-	background: white;
-	color: black;	
+	background:  #f0fbf0;
+	color: green;	
 }
 
 .sidebar .divider{
@@ -82,6 +67,10 @@
 	margin-top: 10px;
 }
 
+.active{
+	background:  #daf5da;
+	color: green !important;
+}
 
 /* CSS for content */
 
@@ -94,9 +83,9 @@
 
 /* CSS for add-contact  */
 .card-body{
-	background-color: #eaecff;
+	background-color: #f9faff;
 	border: 3px solid green;
-	border-radius: 20px;
+	/* border-radius: 20px; */
 }
 
 

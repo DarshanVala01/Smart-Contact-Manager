@@ -6,7 +6,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,18 +13,17 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 import com.spring.project.entities.Contact;
 import com.spring.project.entities.User;
 import com.spring.project.helper.Message;
@@ -43,6 +41,9 @@ public class UserController {
 
 	@Autowired
 	private ContactRepository contactRepository;
+	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 
 	// method for adding common data to response
 
@@ -214,7 +215,7 @@ public class UserController {
 		return "redirect:/user/contact/" + contact.getCId();
 	}
 	
-	
+	// User profile handler
 	@GetMapping("/user-profile")
 	public String userProfile(Principal principal , Model model) {
 		
@@ -224,5 +225,35 @@ public class UserController {
 		model.addAttribute("user" , user);
 		
 		return "user/user_profile";
+	}
+	
+	// Open settings handler
+	@GetMapping("/settings")
+	public String openSettings() {
+		return "user/settings";
+	}
+	
+	// Change password handler
+	@PostMapping("/change-password")
+	public String chnagePassword(@RequestParam("oldPassword") String oldPassword ,
+								@RequestParam("newPassword") String newPassword ,
+								Principal principal, HttpSession session) {
+		
+		User user = this.userRepository.findByEmail(principal.getName());
+		
+		if(this.passwordEncoder.matches(oldPassword, user.getPassword())){
+			
+			// Change Password..
+			user.setPassword(this.passwordEncoder.encode(newPassword));
+			this.userRepository.save(user);
+			session.setAttribute("message", new Message("Password is Changed","changePassword"));
+			return "user/user_dashboard";
+		}
+		else {
+			System.out.println("Password not Match");
+			return "user/settings";
+		}
+		
+		
 	}
 }

@@ -25,9 +25,10 @@
 				
 			</div>
 			
+			<div class="table-responsive">
 			<table class="table table-striped">
-				  <thead>
-				    <tr >
+				  <thead class="thead-dark">
+				    <tr>
 				      <th scope="col">ID</th>
 				      <th scope="col">Name</th>
 				      <th scope="col">Phone No.</th>
@@ -59,7 +60,7 @@
 				    </tr>
 				  </tbody>
 			</table>
-			
+			</div>
 			<!-- Pagination -->
 			
 			<nav aria-label="Page navigation example">
@@ -72,6 +73,14 @@
 			
 				</div>
 			</div>
+			
+			
+				<script>
+			$(document).ready(()=>{
+				$(".item").removeClass("active");
+				$("#view-contact").addClass("active");
+			});
+		</script>
 		</section>
 </body>
 </html>
