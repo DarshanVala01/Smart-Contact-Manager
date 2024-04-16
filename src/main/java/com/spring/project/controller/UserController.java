@@ -6,13 +6,16 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
+import java.util.Map;
 import java.util.Optional;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,14 +23,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.razorpay.*;
 import com.spring.project.entities.Contact;
+import com.spring.project.entities.MyOrders;
 import com.spring.project.entities.User;
 import com.spring.project.helper.Message;
 import com.spring.project.repository.ContactRepository;
+import com.spring.project.repository.OrderRepository;
 import com.spring.project.repository.UserRepository;
 
 import jakarta.servlet.http.HttpSession;
@@ -41,6 +49,9 @@ public class UserController {
 
 	@Autowired
 	private ContactRepository contactRepository;
+	
+	@Autowired
+	private OrderRepository orderRepository;
 	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
@@ -253,7 +264,57 @@ public class UserController {
 			System.out.println("Password not Match");
 			return "user/settings";
 		}
+	}
+	
+	// Create order handler
+	@PostMapping("/create_order")
+	@ResponseBody
+	public String createOrder(@RequestBody Map<String, Object> data , Principal principal) throws RazorpayException {
 		
+		int amount = Integer.parseInt(data.get("amount").toString());
 		
+//		var razorpayClient = new RazorpayClient("rzp_test_OJ96VqHCAEPfEt", "HeGo6WGCgNBRcS3FztjewCIV");
+//							OR
+		RazorpayClient razorpayClient = new RazorpayClient("rzp_test_OJ96VqHCAEPfEt", "HeGo6WGCgNBRcS3FztjewCIV");
+		
+		JSONObject object = new JSONObject();
+		object.put("amount", amount*100); // value of amount must be in paisa(1rs / 100)
+		object.put("currency", "INR");
+		object.put("receipt", "txt_123456");
+		
+		// creating new order
+		Order order = razorpayClient.orders.create(object);
+		
+		// Get user for save in order table
+		User user = this.userRepository.findByEmail(principal.getName());
+		
+		// save this order to your database
+		MyOrders myOrders = new MyOrders();
+		
+		myOrders.setAmount(order.get("amount"));
+		myOrders.setOrderId(order.get("id"));
+		myOrders.setPaymentId(null);
+		myOrders.setStatus("created");
+		myOrders.setReceipt(order.get("receipt"));
+		myOrders.setUser(user);
+
+		this.orderRepository.save(myOrders);
+
+		
+		return order.toString();
+	}
+	
+	@PostMapping("/update_order")
+	@ResponseBody
+	public ResponseEntity<?> updateOrder(@RequestBody Map<String, Object> data) {
+	
+		MyOrders myOrders = this.orderRepository.findByOrderId(data.get("order_id").toString());
+		
+		myOrders.setPaymentId(data.get("payment_id").toString());
+		myOrders.setStatus(data.get("my_status").toString());
+		
+		this.orderRepository.save(myOrders);
+		System.out.println(data);
+		return ResponseEntity.ok(Map.of("msg","updated"));
 	}
 }

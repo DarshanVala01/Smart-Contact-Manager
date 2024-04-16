@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
 <head>
 	<meta charset="UTF-8" />
 	<title>Document</title>
@@ -13,21 +13,21 @@
 				
 					<div class="my-card">					
 	
-						<h1 class="text-center" style="font-family: Garamond;">Forgot Password Form</h1>
+						<h1 class="text-center" style="font-family: Garamond;">OTP Form</h1>
 						
 						
-							<form  id="login-form" class="form" th:action="@{/send-otp}" action="#" method="post"> 
+							<form  id="login-form" class="form" th:action="@{/verify-otp}" action="#" method="post"> 
 					
 							
 			  					<!-- Email -->	
 								<div class="form-data mt-3">
-			   						 <label for="email" class="form-label">Email :</label>
+			   						 <label for="email" class="form-label">OTP :</label>
 			  						 <input 
-			  						 	type="email" 
-			  						 	name="email" 
+			  						 	type="text" 
+			  						 	name="otp" 
 			  						 	class="form-control" 
-			  						 	id="email" 
-			  						 	placeholder="Enter email here" required>	  						 	
+			  						 	id="otp" 
+			  						 	placeholder="Enter otp here" required>	  						 	
 			  					</div>
 							
 								
@@ -35,10 +35,9 @@
 										
 			  					<!-- Submit Button -->
 			  					<div class="text-center submit_button">
-				  					<button type="submit"class="btn btn-outline-success mt-3 ">Send Code</button>
+				  					<button type="submit" class="btn btn-outline-success mt-3 ">Verify</button>
 				  				</div>
-			  					
-			  					
+				  				
 							</form>
 							
 						</div>
