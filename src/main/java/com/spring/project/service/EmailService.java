@@ -17,7 +17,7 @@ public boolean sendEmail(String subject , String message, String to) {
 		
 		SimpleMailMessage mailMessage = new SimpleMailMessage();
 		
-		mailMessage.setFrom("darshanvala024@gmail.com");
+		mailMessage.setFrom("abc@gmail.com");
 		mailMessage.setTo(to);
 		mailMessage.setText(message);
 		mailMessage.setSubject(subject);
