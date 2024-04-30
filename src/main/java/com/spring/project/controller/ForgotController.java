@@ -76,6 +76,7 @@ public class ForgotController {
 				return "forgot_email_form";
 			}
 		}
+		
 	}
 	
 	
